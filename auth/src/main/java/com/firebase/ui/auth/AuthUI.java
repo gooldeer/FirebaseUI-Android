@@ -31,6 +31,7 @@ import android.util.Log;
 
 import com.facebook.login.LoginManager;
 import com.firebase.ui.auth.data.model.FlowParameters;
+import com.firebase.ui.auth.data.model.LinkedInAuthProvider;
 import com.firebase.ui.auth.data.remote.TwitterSignInHandler;
 import com.firebase.ui.auth.ui.idp.AuthMethodPickerActivity;
 import com.firebase.ui.auth.util.CredentialUtils;
@@ -120,6 +121,7 @@ public final class AuthUI {
                     GithubAuthProvider.PROVIDER_ID,
                     EmailAuthProvider.PROVIDER_ID,
                     PhoneAuthProvider.PROVIDER_ID,
+                    LinkedInAuthProvider.PROVIDER_ID,
                     ANONYMOUS_PROVIDER,
                     EMAIL_LINK_PROVIDER
             )));
@@ -133,6 +135,7 @@ public final class AuthUI {
                     GoogleAuthProvider.PROVIDER_ID,
                     FacebookAuthProvider.PROVIDER_ID,
                     TwitterAuthProvider.PROVIDER_ID,
+                    LinkedInAuthProvider.PROVIDER_ID,
                     GithubAuthProvider.PROVIDER_ID)));
 
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
@@ -460,6 +463,7 @@ public final class AuthUI {
             GithubAuthProvider.PROVIDER_ID,
             EmailAuthProvider.PROVIDER_ID,
             PhoneAuthProvider.PROVIDER_ID,
+            LinkedInAuthProvider.PROVIDER_ID,
             ANONYMOUS_PROVIDER,
             EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD
     })

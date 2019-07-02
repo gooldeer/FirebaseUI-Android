@@ -15,5 +15,6 @@
     <color name="fui_bgEmail">#D0021B</color>
     <color name="fui_bgPhone">#43C5A5</color>
     <color name="fui_bgAnonymous">#f4b400</color>
+    <color name="fui_bgLinkedin">#FF0077B5</color>
     <color name="fui_buttonShadow">#64BEBEBE</color>
 </resources>

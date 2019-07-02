@@ -66,6 +66,12 @@ public class AuthOperationManager {
         }
     }
 
+    public Task<AuthResult> signInCustomToken(@NonNull FirebaseAuth auth,
+                                              @NonNull String token) {
+
+        return auth.signInWithCustomToken(token);
+    }
+
     public Task<AuthResult> signInAndLinkWithCredential(@NonNull FirebaseAuth auth,
                                                         @NonNull FlowParameters flowParameters,
                                                         @NonNull AuthCredential credential) {

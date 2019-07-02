@@ -1,3 +1,4 @@
+import Config.Plugins.android
 import com.android.build.gradle.internal.dsl.TestOptions
 
 plugins {
@@ -43,6 +44,7 @@ dependencies {
     api(Config.Libs.PlayServices.auth)
 
     compileOnly(Config.Libs.Provider.facebook)
+    implementation(project(Config.Libs.Provider.appAuth))
     implementation(Config.Libs.Support.v4) // Needed to override deps
     implementation(Config.Libs.Support.cardView) // Needed to override Facebook
     compileOnly(Config.Libs.Provider.twitter) { isTransitive = true }

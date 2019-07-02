@@ -4,6 +4,9 @@ val inCiBuild = System.getenv("CI") == "true"
 android {
     defaultConfig {
         multiDexEnabled = true
+        manifestPlaceholders = mapOf(
+                "appAuthRedirectScheme" to "com.firebae.uidemo"
+        )
     }
 
     buildTypes {
