@@ -1,10 +1,8 @@
 package com.firebase.ui.auth.data.remote;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Parcel;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RestrictTo;
@@ -27,8 +25,6 @@ import net.openid.appauth.AuthorizationRequest;
 import net.openid.appauth.AuthorizationResponse;
 import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.AuthorizationServiceConfiguration;
-import net.openid.appauth.ClientAuthentication;
-import net.openid.appauth.ClientSecretPost;
 import net.openid.appauth.ResponseTypeValues;
 
 import java.util.concurrent.TimeUnit;
@@ -78,9 +74,9 @@ public class LinkedInSignInHandler extends ProviderSignInBase<Void> {
         AuthorizationRequest.Builder authRequestBuilder =
                 new AuthorizationRequest.Builder(
                         serviceConfig, // the authorization service configuration
-                        getApplication().getString(R.string.fui_linkedin_client_id), // the client ID, typically pre-registered and static
+                        getApplication().getString(R.string.linkedin_client_id), // the client ID, typically pre-registered and static
                         ResponseTypeValues.CODE, // the response_type value: we want a code
-                        Uri.parse(getApplication().getString(R.string.fui_linkedin_redirect_uri))); // the redirect URI to which the auth response is sent
+                        Uri.parse(getApplication().getString(R.string.linkedin_redirect_uri))); // the redirect URI to which the auth response is sent
 
         authRequestBuilder.setCodeVerifier(null);
 

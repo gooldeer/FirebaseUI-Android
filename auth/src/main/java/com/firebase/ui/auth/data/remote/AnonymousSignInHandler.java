@@ -46,7 +46,7 @@ public class AnonymousSignInHandler extends ProviderSignInBase<FlowParameters> {
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult result) {
-                        setResult(Resource.<IdpResponse>forSuccess(initResponse(
+                        setResult(Resource.forSuccess(initResponse(
                                 result.getAdditionalUserInfo().isNewUser())));
                     }
                 })

@@ -58,4 +58,9 @@
     https://developers.google.com/android/guides/google-services-plugin
     -->
     <string name="default_web_client_id" translatable="false">CHANGE-ME</string>
+
+    <string name="linkedin_client_id" translatable="false">TO_CHANGE</string>
+    <string name="inkedin_redirect_uri" translatable="false">TO_CHANGE</string>
+    <string name="linkedin_client_secret" translatable="false">TO_CHANGE</string>
+
 </resources>

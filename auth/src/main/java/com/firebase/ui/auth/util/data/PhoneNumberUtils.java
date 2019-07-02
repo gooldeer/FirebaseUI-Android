@@ -68,7 +68,7 @@ public final class PhoneNumberUtils {
             return phoneNumber;
         } else {
             return "+"
-                    + String.valueOf(countryInfo.getCountryCode())
+                    + countryInfo.getCountryCode()
                     + phoneNumber.replaceAll("[^\\d.]", "");
         }
     }
