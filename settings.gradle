@@ -10,5 +10,7 @@ include(
 
         ":lint",
 
-        ":proguard-tests", ":internal:lint", ":internal:lintchecks"
+        ":proguard-tests", ":internal:lint", ":internal:lintchecks",
+        ":app-auth"
 )
+project(':app-auth').projectDir = new File('AppAuth-Android/library')

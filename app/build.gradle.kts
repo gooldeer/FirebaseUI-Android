@@ -4,6 +4,10 @@
 android {
     defaultConfig {
         multiDexEnabled = true
+
+        manifestPlaceholders = mapOf(
+            "appAuthRedirectScheme" to "com.firebae.uidemo"
+        )
     }
 
     buildTypes {
@@ -38,6 +42,7 @@ dependencies {
     implementation(project(":storage"))
 
     implementation(Config.Libs.Provider.facebook)
+    implementation(project(Config.Libs.Provider.appAuth))
     // Needed to override Facebook
     implementation(Config.Libs.Support.cardView)
     implementation(Config.Libs.Support.customTabs)

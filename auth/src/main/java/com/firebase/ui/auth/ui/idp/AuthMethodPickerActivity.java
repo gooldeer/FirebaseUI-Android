@@ -32,12 +32,14 @@ import android.widget.Toast;
 import com.firebase.ui.auth.*;
 import com.firebase.ui.auth.AuthUI.IdpConfig;
 import com.firebase.ui.auth.data.model.FlowParameters;
+import com.firebase.ui.auth.data.model.LinkedInAuthProvider;
 import com.firebase.ui.auth.data.model.UserCancellationException;
 import com.firebase.ui.auth.data.remote.AnonymousSignInHandler;
 import com.firebase.ui.auth.data.remote.EmailSignInHandler;
 import com.firebase.ui.auth.data.remote.FacebookSignInHandler;
 import com.firebase.ui.auth.data.remote.GitHubSignInHandlerBridge;
 import com.firebase.ui.auth.data.remote.GoogleSignInHandler;
+import com.firebase.ui.auth.data.remote.LinkedInSignInHandler;
 import com.firebase.ui.auth.data.remote.PhoneSignInHandler;
 import com.firebase.ui.auth.data.remote.TwitterSignInHandler;
 import com.firebase.ui.auth.ui.AppCompatBase;
@@ -193,6 +195,9 @@ public class AuthMethodPickerActivity extends AppCompatBase {
                 case AuthUI.ANONYMOUS_PROVIDER:
                     buttonLayout = R.layout.fui_provider_button_anonymous;
                     break;
+                case LinkedInAuthProvider.PROVIDER_ID:
+                    buttonLayout = R.layout.fui_idp_button_linkedin;
+                    break;
                 default:
                     throw new IllegalStateException("Unknown provider: " + providerId);
             }
@@ -260,6 +265,11 @@ public class AuthMethodPickerActivity extends AppCompatBase {
                 phone.init(idpConfig);
                 provider = phone;
 
+                break;
+            case LinkedInAuthProvider.PROVIDER_ID:
+                LinkedInSignInHandler linkedin = supplier.get(LinkedInSignInHandler.class);
+                linkedin.init(null);
+                provider = linkedin;
                 break;
             case AuthUI.ANONYMOUS_PROVIDER:
                 AnonymousSignInHandler anonymous = supplier.get(AnonymousSignInHandler.class);

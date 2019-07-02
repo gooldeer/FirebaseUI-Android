@@ -12,6 +12,7 @@ import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.FirebaseUiException;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.data.model.IntentRequiredException;
+import com.firebase.ui.auth.data.model.LinkedInAuthProvider;
 import com.firebase.ui.auth.data.model.Resource;
 import com.firebase.ui.auth.data.model.User;
 import com.firebase.ui.auth.data.remote.ProfileMerger;
@@ -24,6 +25,7 @@ import com.firebase.ui.auth.viewmodel.RequestCodes;
 import com.firebase.ui.auth.viewmodel.SignInViewModelBase;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -52,13 +54,23 @@ public class SocialProviderResponseHandler extends SignInViewModelBase {
 
         setResult(Resource.<IdpResponse>forLoading());
 
-        final AuthCredential credential = ProviderUtils.getAuthCredential(response);
+        Task<AuthResult> task;
+        AuthCredential credential = null;
 
-        AuthOperationManager.getInstance().signInAndLinkWithCredential(
-                getAuth(),
-                getArguments(),
-                credential)
-                .continueWithTask(new ProfileMerger(response))
+        if (response.getProviderType().equals(LinkedInAuthProvider.PROVIDER_ID)) {
+            task = AuthOperationManager.getInstance()
+                    .signInCustomToken(getAuth(), response.getIdpToken());
+        } else {
+
+            credential = ProviderUtils.getAuthCredential(response);
+
+            task = AuthOperationManager.getInstance().signInAndLinkWithCredential(
+                    getAuth(),
+                    getArguments(),
+                    credential);
+        }
+        final AuthCredential finalCredential = credential;
+        task.continueWithTask(new ProfileMerger(response))
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult result) {
@@ -87,9 +99,9 @@ public class SocialProviderResponseHandler extends SignInViewModelBase {
                                     .addOnSuccessListener(new OnSuccessListener<List<String>>() {
                                         @Override
                                         public void onSuccess(List<String> providers) {
-                                            if (providers.contains(response.getProviderType())) {
+                                            if (providers.contains(response.getProviderType()) && finalCredential != null) {
                                                 // Case 1
-                                                handleMergeFailure(credential);
+                                                handleMergeFailure(finalCredential);
                                             } else if (providers.isEmpty()) {
                                                 setResult(Resource.<IdpResponse>forFailure(
                                                         new FirebaseUiException(
