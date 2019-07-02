@@ -1,6 +1,14 @@
 import com.android.build.gradle.internal.dsl.TestOptions
 
+plugins {
+    id("com.android.library")
+    kotlin("android")
+    kotlin("kapt")
+    kotlin("android.extensions")
+}
+
 android {
+    compileSdkVersion(Config.SdkVersions.compile)
     buildTypes {
         named("release").configure {
             postprocessing {
@@ -46,5 +54,5 @@ dependencies {
     testImplementation(Config.Libs.Provider.facebook)
     testImplementation(Config.Libs.Provider.twitter) { isTransitive = true }
 
-    debugImplementation(project(":internal:lintchecks"))
+//    debugImplementation(project(":internal:lintchecks"))
 }
