@@ -39,6 +39,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 public class LinkedInSignInHandler extends ProviderSignInBase<Void> {
 
+    private static final int RC_LINKED_IN = 9076;
+
     static String LINKED_IN_OAUTH_URL = "https://www.linkedin.com/oauth/v2/authorization";
     static String LINKED_IN_TOKEN_URL = "https://www.linkedin.com/oauth/v2/accessToken";
 
@@ -98,39 +100,53 @@ public class LinkedInSignInHandler extends ProviderSignInBase<Void> {
     public void startSignIn(@NonNull HelperActivityBase activity) {
         Intent intent = mAuthorizationService
                 .getAuthorizationRequestIntent(buildLinkedInAuthorizationRequest());
-        getApplication().startActivity(intent);
+        activity.startActivityForResult(intent, RC_LINKED_IN);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        final AuthorizationResponse resp = AuthorizationResponse.fromIntent(data);
-        AuthorizationException ex = AuthorizationException.fromIntent(data);
 
-        mLinkedInAuthState.update(resp, ex);
+        if (RC_LINKED_IN == requestCode && data != null) {
 
-        setResult(Resource.<IdpResponse>forLoading());
+            final AuthorizationResponse resp = AuthorizationResponse.fromIntent(data);
+            AuthorizationException ex = AuthorizationException.fromIntent(data);
 
-        mRetrofit.create(LinkedInApi.class).createFirebaseToken(
-                new LinkedInFirebaseRequest(resp.authorizationCode, resp.state))
-                .enqueue(new Callback<LinkedInFirebaseResponse>() {
-                    @Override
-                    public void onResponse(Call<LinkedInFirebaseResponse> call,
-                                           Response<LinkedInFirebaseResponse> response) {
-                        if (response.isSuccessful()) {
-                            setResult(Resource.forSuccess(createResponse(
-                                    response.body().getToken(),
-                                    resp.state)));
-                        } else {
-                            setResult(Resource.<IdpResponse>forFailure(new RuntimeException("LinkedIn response is unsuccessful")));
+            mLinkedInAuthState.update(resp, ex);
+            setResult(Resource.<IdpResponse>forLoading());
+
+            if (ex != null) {
+                setResult(Resource.<IdpResponse>forFailure(new FirebaseUiException(
+                        ErrorCodes.PROVIDER_ERROR, ex)));
+                return;
+            }
+
+            if (resp == null) {
+                setResult(Resource.<IdpResponse>forFailure(new RuntimeException("LinkedIn response is unsuccessful")));
+                return;
+            }
+
+            mRetrofit.create(LinkedInApi.class).createFirebaseToken(
+                    new LinkedInFirebaseRequest(resp.authorizationCode, resp.state))
+                    .enqueue(new Callback<LinkedInFirebaseResponse>() {
+                        @Override
+                        public void onResponse(Call<LinkedInFirebaseResponse> call,
+                                               Response<LinkedInFirebaseResponse> response) {
+                            if (response.isSuccessful()) {
+                                setResult(Resource.forSuccess(createResponse(
+                                        response.body().getToken(),
+                                        resp.state)));
+                            } else {
+                                setResult(Resource.<IdpResponse>forFailure(new RuntimeException("LinkedIn response is unsuccessful")));
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<LinkedInFirebaseResponse> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<LinkedInFirebaseResponse> call, Throwable t) {
                             setResult(Resource.<IdpResponse>forFailure(new FirebaseUiException(
                                     ErrorCodes.PROVIDER_ERROR, t)));
-                    }
-                });
+                        }
+                    });
+        }
     }
 
     private static IdpResponse createResponse(String code, String state) {
