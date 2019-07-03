@@ -1077,6 +1077,24 @@ public final class AuthUI {
         }
 
         /**
+         * {@link IdpConfig} builder for the Twitter provider.
+         */
+        public static final class LinkedInBuilder extends Builder {
+            public LinkedInBuilder() {
+                super(LinkedInAuthProvider.PROVIDER_ID);
+
+                Preconditions.checkConfigured(getApplicationContext(),
+                        "Linkedin provider unconfigured. Make sure to add your key and secret." +
+                                " See the docs for more info:" +
+                                " https://github" +
+                                ".com/firebase/FirebaseUI-Android/blob/master/auth/README" +
+                                ".md#twitter",
+                        R.string.linkedin_client_id,
+                        R.string.linkedin_redirect_uri);
+            }
+        }
+
+        /**
          * {@link IdpConfig} builder for the GitHub provider.
          */
         public static final class GitHubBuilder extends Builder {

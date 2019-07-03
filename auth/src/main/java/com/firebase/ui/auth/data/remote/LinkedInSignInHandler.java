@@ -47,7 +47,7 @@ public class LinkedInSignInHandler extends ProviderSignInBase<Void> {
 
     private Retrofit mRetrofit;
 
-    protected LinkedInSignInHandler(Application application) {
+    public LinkedInSignInHandler(Application application) {
         super(application);
         mAuthorizationService = new AuthorizationService(application);
 
