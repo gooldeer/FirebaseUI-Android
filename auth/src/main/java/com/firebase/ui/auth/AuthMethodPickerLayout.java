@@ -6,9 +6,16 @@ import android.os.Parcelable;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
-import com.google.firebase.auth.*;
 
-import java.util.*;
+import com.firebase.ui.auth.data.model.LinkedInAuthProvider;
+import com.google.firebase.auth.EmailAuthProvider;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.auth.TwitterAuthProvider;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Layout model to help customizing layout of the AuthMethodPickerActivity screen,
@@ -132,6 +139,14 @@ public class AuthMethodPickerLayout implements Parcelable {
          */
         public AuthMethodPickerLayout.Builder setEmailButtonId(@IdRes int emailButton) {
             providersMapping.put(EmailAuthProvider.PROVIDER_ID, emailButton);
+            return this;
+        }
+
+        /**
+         * Set the ID of the Email sign in button in the custom layout.
+         */
+        public AuthMethodPickerLayout.Builder setLinkedInButtonId(@IdRes int button) {
+            providersMapping.put(LinkedInAuthProvider.PROVIDER_ID, button);
             return this;
         }
 
