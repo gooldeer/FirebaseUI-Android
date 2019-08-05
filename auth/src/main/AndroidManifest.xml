@@ -86,6 +86,7 @@
 
         <activity
             android:name=".ui.idp.AuthMethodPickerActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:label="@string/fui_default_toolbar_title"
             android:exported="false" />
 
