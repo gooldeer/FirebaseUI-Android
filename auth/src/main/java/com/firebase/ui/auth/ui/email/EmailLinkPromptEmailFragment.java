@@ -1,21 +1,19 @@
 package com.firebase.ui.auth.ui.email;
 
-import android.arch.lifecycle.ViewModelProviders;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RestrictTo;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.R;
@@ -24,6 +22,7 @@ import com.firebase.ui.auth.util.data.PrivacyDisclosureUtils;
 import com.firebase.ui.auth.util.ui.fieldvalidators.EmailFieldValidator;
 import com.firebase.ui.auth.viewmodel.ResourceObserver;
 import com.firebase.ui.auth.viewmodel.email.EmailLinkSignInHandler;
+import com.google.android.material.textfield.TextInputLayout;
 
 /** Prompts the user to enter their email to finish the cross-device email link sign in flow. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)

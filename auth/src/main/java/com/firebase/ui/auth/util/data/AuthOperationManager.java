@@ -1,8 +1,8 @@
 package com.firebase.ui.auth.util.data;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
+import androidx.annotation.VisibleForTesting;
 
 import com.firebase.ui.auth.data.model.FlowParameters;
 import com.google.android.gms.tasks.Continuation;

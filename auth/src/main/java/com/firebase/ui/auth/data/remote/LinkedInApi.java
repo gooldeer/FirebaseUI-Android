@@ -1,6 +1,6 @@
 package com.firebase.ui.auth.data.remote;
 
-import android.support.annotation.RestrictTo;
+import androidx.annotation.RestrictTo;
 
 import com.firebase.ui.auth.data.model.LinkedInFirebaseRequest;
 import com.firebase.ui.auth.data.model.LinkedInFirebaseResponse;

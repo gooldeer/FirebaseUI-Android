@@ -1,9 +1,10 @@
 package com.firebase.ui.auth.util.data;
 
 import android.content.Context;
-import android.support.annotation.RestrictTo;
-import android.support.annotation.StringRes;
 import android.widget.TextView;
+
+import androidx.annotation.RestrictTo;
+import androidx.annotation.StringRes;
 
 import com.firebase.ui.auth.R;
 import com.firebase.ui.auth.data.model.FlowParameters;

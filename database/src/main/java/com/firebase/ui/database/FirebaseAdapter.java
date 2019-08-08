@@ -1,8 +1,8 @@
 package com.firebase.ui.database;
 
-import android.arch.lifecycle.LifecycleObserver;
-import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
 
 import com.google.firebase.database.DatabaseReference;
 

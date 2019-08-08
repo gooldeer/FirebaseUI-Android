@@ -1,7 +1,7 @@
 package com.firebase.ui.auth.ui.phone;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
+import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
 
 import com.google.firebase.auth.PhoneAuthCredential;
 

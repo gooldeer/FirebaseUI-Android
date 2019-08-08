@@ -1,6 +1,6 @@
 package com.firebase.ui.database;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.firebase.ui.common.BaseCachingSnapshotParser;
 import com.firebase.ui.common.BaseSnapshotParser;

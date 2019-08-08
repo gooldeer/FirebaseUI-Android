@@ -2,7 +2,8 @@ package com.firebase.ui.auth.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.RestrictTo;
+
+import androidx.annotation.RestrictTo;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 public class LinkedInFirebaseResponse implements Parcelable {

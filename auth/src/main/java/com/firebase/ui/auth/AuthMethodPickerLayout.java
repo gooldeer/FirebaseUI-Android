@@ -3,9 +3,10 @@ package com.firebase.ui.auth;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 
 import com.firebase.ui.auth.data.model.LinkedInAuthProvider;
 import com.google.firebase.auth.EmailAuthProvider;

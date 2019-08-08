@@ -15,7 +15,6 @@
 package com.firebase.ui.auth.ui.email;
 
 import android.content.Intent;
-import android.support.design.widget.TextInputLayout;
 import android.widget.Button;
 
 import com.firebase.ui.auth.IdpResponse;
@@ -23,6 +22,7 @@ import com.firebase.ui.auth.R;
 import com.firebase.ui.auth.data.model.User;
 import com.firebase.ui.auth.testhelpers.TestConstants;
 import com.firebase.ui.auth.testhelpers.TestHelper;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.EmailAuthProvider;
 
 import org.junit.Before;

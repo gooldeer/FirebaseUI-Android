@@ -1,10 +1,11 @@
 package com.firebase.ui.auth.viewmodel;
 
-import android.arch.lifecycle.Observer;
-import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
-import android.support.annotation.StringRes;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
+import androidx.annotation.StringRes;
+import androidx.lifecycle.Observer;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.R;

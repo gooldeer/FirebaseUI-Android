@@ -1,7 +1,7 @@
 package com.firebase.ui.database;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.firebase.ui.common.Preconditions;
 import com.google.firebase.database.DataSnapshot;

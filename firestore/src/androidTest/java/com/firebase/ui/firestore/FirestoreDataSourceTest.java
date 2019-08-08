@@ -1,9 +1,9 @@
 package com.firebase.ui.firestore;
 
-import android.arch.lifecycle.Observer;
+import androidx.lifecycle.Observer;
 import android.arch.paging.PageKeyedDataSource;
-import android.support.annotation.Nullable;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.annotation.Nullable;
+import androidx.test.runner.AndroidJUnit4;
 
 import com.firebase.ui.firestore.paging.FirestoreDataSource;
 import com.firebase.ui.firestore.paging.LoadingState;

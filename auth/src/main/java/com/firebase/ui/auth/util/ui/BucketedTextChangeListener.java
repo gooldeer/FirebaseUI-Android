@@ -19,11 +19,12 @@
 package com.firebase.ui.auth.util.ui;
 
 import android.annotation.SuppressLint;
-import android.support.annotation.RestrictTo;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.widget.EditText;
+
+import androidx.annotation.RestrictTo;
 
 import java.util.Collections;
 

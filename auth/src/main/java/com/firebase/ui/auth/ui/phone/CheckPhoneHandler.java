@@ -3,8 +3,9 @@ package com.firebase.ui.auth.ui.phone;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.annotation.RestrictTo;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import com.firebase.ui.auth.data.model.PendingIntentRequiredException;
 import com.firebase.ui.auth.data.model.PhoneNumber;
