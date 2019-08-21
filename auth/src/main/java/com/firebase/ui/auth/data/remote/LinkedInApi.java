@@ -12,7 +12,7 @@ import retrofit2.http.POST;
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 public interface LinkedInApi {
 
-    @POST()
+    @POST("auth/linkedin/token")
     Call<LinkedInFirebaseResponse> createFirebaseToken(
             @Body LinkedInFirebaseRequest request);
 }
