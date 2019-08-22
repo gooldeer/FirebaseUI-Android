@@ -50,6 +50,12 @@ public class LinkedInSignInHandler extends ProviderSignInBase<Void> {
 
     private Retrofit mRetrofit;
 
+    private boolean onlyFirstStep = false;
+
+    public void setOnlyFirstStep(boolean onlyFirstStep) {
+        this.onlyFirstStep = onlyFirstStep;
+    }
+
     public LinkedInSignInHandler(Application application) {
         super(application);
         mAuthorizationService = new AuthorizationService(application);
@@ -86,7 +92,7 @@ public class LinkedInSignInHandler extends ProviderSignInBase<Void> {
         mLinkedInAuthState = new AuthState(serviceConfig);
 
         return authRequestBuilder
-                .setScope("r_basicprofile r_emailaddress")
+                .setScope("r_liteprofile r_emailaddress")
                 .build();
     }
 
@@ -126,27 +132,34 @@ public class LinkedInSignInHandler extends ProviderSignInBase<Void> {
                 return;
             }
 
-            mRetrofit.create(LinkedInApi.class).createFirebaseToken(
-                    new LinkedInFirebaseRequest(resp.authorizationCode, resp.state))
-                    .enqueue(new Callback<LinkedInFirebaseResponse>() {
-                        @Override
-                        public void onResponse(Call<LinkedInFirebaseResponse> call,
-                                               Response<LinkedInFirebaseResponse> response) {
-                            if (response.isSuccessful()) {
-                                setResult(Resource.forSuccess(createResponse(
-                                        response.body().getToken(),
-                                        resp.state)));
-                            } else {
-                                setResult(Resource.<IdpResponse>forFailure(new RuntimeException("LinkedIn response is unsuccessful")));
-                            }
-                        }
+            if (onlyFirstStep) {
+                setResult(Resource.forSuccess(createResponse(
+                        resp.authorizationCode,
+                        resp.state)));
+            } else {
 
-                        @Override
-                        public void onFailure(Call<LinkedInFirebaseResponse> call, Throwable t) {
-                            setResult(Resource.<IdpResponse>forFailure(new FirebaseUiException(
-                                    ErrorCodes.PROVIDER_ERROR, t)));
-                        }
-                    });
+                mRetrofit.create(LinkedInApi.class).createFirebaseToken(
+                        new LinkedInFirebaseRequest(resp.authorizationCode, resp.state))
+                        .enqueue(new Callback<LinkedInFirebaseResponse>() {
+                            @Override
+                            public void onResponse(Call<LinkedInFirebaseResponse> call,
+                                                   Response<LinkedInFirebaseResponse> response) {
+                                if (response.isSuccessful()) {
+                                    setResult(Resource.forSuccess(createResponse(
+                                            response.body().getToken(),
+                                            resp.state)));
+                                } else {
+                                    setResult(Resource.<IdpResponse>forFailure(new RuntimeException("LinkedIn response is unsuccessful")));
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<LinkedInFirebaseResponse> call, Throwable t) {
+                                setResult(Resource.<IdpResponse>forFailure(new FirebaseUiException(
+                                        ErrorCodes.PROVIDER_ERROR, t)));
+                            }
+                        });
+            }
         }
     }
 
